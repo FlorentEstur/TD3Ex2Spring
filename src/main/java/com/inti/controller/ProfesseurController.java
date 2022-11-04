@@ -32,7 +32,7 @@ public class ProfesseurController {
 		return ipr.findAll();
 	}
 	
-	@GetMapping("getEcole/{id}")
+	@GetMapping("getProfesseur/{id}")
 	public Professeur getProfesseur(@PathVariable int id)
 	{
 		int idMax = ipr.findMaxId();
