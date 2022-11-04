@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -19,24 +19,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="etudiant_TD3")
+@Table(name="ecole_TD3")
 @Data @NoArgsConstructor @AllArgsConstructor
 @JsonIdentityInfo(
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "id")
-public class Etudiant {
-
+public class Ecole {
 	@Id
 	private int id;
-	private String nom, prenom, email, telephone;
-	private int anneeEtude;
+	private String nom, adresse, ville;
+	private int cp;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name="Professeur_Etudiant", joinColumns = @JoinColumn(name="idEtudiant"),
+	@JoinTable(name="Ecole_Professeur", joinColumns = @JoinColumn(name="idEcole"),
 	inverseJoinColumns = @JoinColumn(name="idProfesseur"))
 	private List<Professeur> listeProfesseur;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="idEcole")
-	private Ecole ecole;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ecole")
+	private List<Etudiant> listeEtudiant;
 }
