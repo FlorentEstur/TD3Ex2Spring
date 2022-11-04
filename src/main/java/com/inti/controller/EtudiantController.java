@@ -81,10 +81,9 @@ public class EtudiantController {
 			etudiant.setEmail(newEtudiant.getEmail());
 			etudiant.setTelephone(newEtudiant.getTelephone());
 			etudiant.setAnneeEtude(newEtudiant.getAnneeEtude());
-			return ier.save(newEtudiant);
+			return ier.save(etudiant);
 		}).orElseGet(() ->{
 			return ier.save(newEtudiant);
 		});
-	
 	}
 }
